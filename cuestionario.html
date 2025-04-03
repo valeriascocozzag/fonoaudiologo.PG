@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evaluación del Lenguaje</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: #fff7f5;
+    }
+
+    .quiz-container {
+      max-width: 650px;
+      margin: 50px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .logo-paola {
+      display: block;
+      margin: 0 auto 30px;
+      max-width: 180px;
+    }
+
+    .question h5 {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .option-label:hover,
+    .option-label input:checked + span {
+      background-color: #e6f0ff;
+      border-color: #6c63ff;
+    }
+
+    .option-label input {
+      display: none;
+    }
+
+    .option-label span::before {
+      content: '🗣';
+      margin-right: 10px;
+    }
+
+    .btn-next {
+      background-color: #b5d6a7;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1rem;
+      color: #333;
+      transition: all 0.3s ease;
+    }
+
+    .btn-next:hover {
+      background-color: #a0c896;
+      transform: scale(1.05);
+    }
+
+    .btn-next:disabled {
+      background-color: #ddd;
+      cursor: not-allowed;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <img src="logo-paolaG.png" alt="Paola G" class="logo-paola">
+
+  <!-- Pantalla de selección de edad -->
+  <div id="pantallaEdad">
+    <h5 class="text-center mb-4">¿Cuántos meses o años tiene su hijo?</h5>
+    <select id="edadSeleccionada" class="form-select mb-3" required>
+      <option value="" disabled selected>Selecciona un rango de edad</option>
+      <option value="grupo1">0–11 meses</option>
+      <option value="grupo2">12–23 meses</option>
+      <option value="grupo3">2–3 años</option>
+      <option value="grupo4">4 años o más</option>
+    </select>
+    <button class="btn btn-next" onclick="iniciarCuestionario()" id="btnIniciar" disabled>Iniciar Evaluación</button>
+  </div>
+
+  <!-- Formulario de preguntas -->
+  <div id="formulario" style="display: none;">
+    <div id="preguntaActual" class="question"></div>
+    <button class="btn btn-next mt-3" id="btnContinuar" disabled>Continuar</button>
+  </div>
+</div>
+
+<script>
+  const preguntasPorGrupo = {
+    grupo1: [
+      "¿Reacciona a sonidos fuertes?",
+      "¿Mueve la cabeza hacia voces conocidas?",
+      "¿Hace sonidos o balbuceos con frecuencia?",
+      "¿Parece reconocer la voz de mamá o papá?"
+    ],
+    grupo2: [
+      "¿Dice al menos 5 palabras diferentes?",
+      "¿Señala cosas que quiere?",
+      "¿Entiende instrucciones simples como 'ven aquí'?",
+      "¿Imita sonidos o palabras de los adultos?"
+    ],
+    grupo3: [
+      "¿Usa frases de dos o más palabras?",
+      "¿Puede nombrar objetos familiares?",
+      "¿Se le entiende cuando habla con personas cercanas?",
+      "¿Responde preguntas simples como '¿qué es eso?'?"
+    ],
+    grupo4: [
+      "¿Forma oraciones completas correctamente?",
+      "¿Pronuncia bien la mayoría de los sonidos?",
+      "¿Sostiene conversaciones con niños y adultos?",
+      "¿Puede contar lo que hizo durante el día?"
+    ]
+  };
+
+  const puntajes = {
+    "Siempre": 1,
+    "Algunas veces": 0.5,
+    "Nunca": 0
+  };
+
+  let grupoSeleccionado = "";
+  let edadTexto = "";
+  let preguntas = [];
+  let respuestas = [];
+  let preguntaIndex = 0;
+
+  const edadSelect = document.getElementById("edadSeleccionada");
+  const btnIniciar = document.getElementById("btnIniciar");
+  const preguntaDiv = document.getElementById("preguntaActual");
+  const btnContinuar = document.getElementById("btnContinuar");
+
+  edadSelect.addEventListener("change", () => {
+    grupoSeleccionado = edadSelect.value;
+    edadTexto = edadSelect.options[edadSelect.selectedIndex].text;
+    btnIniciar.disabled = grupoSeleccionado === "";
+  });
+
+  function iniciarCuestionario() {
+    preguntas = preguntasPorGrupo[grupoSeleccionado];
+    if (!preguntas) return;
+
+    document.getElementById("pantallaEdad").style.display = "none";
+    document.getElementById("formulario").style.display = "block";
+    mostrarPregunta();
+  }
+
+  function mostrarPregunta() {
+    btnContinuar.disabled = true;
+    const pregunta = preguntas[preguntaIndex];
+    preguntaDiv.innerHTML = `
+      <h5><strong>${preguntaIndex + 1}.</strong> ${pregunta}</h5>
+      <label class="option-label">
+        <input type="radio" name="respuesta" value="Siempre" onchange="habilitarBoton()" />
+        <span>Siempre</span>
+      </label>
+      <label class="option-label">
+        <input type="radio" name="respuesta" value="Algunas veces" onchange="habilitarBoton()" />
+        <span>Algunas veces</span>
+      </label>
+      <label class="option-label">
+        <input type="radio" name="respuesta" value="Nunca" onchange="habilitarBoton()" />
+        <span>Nunca</span>
+      </label>
+    `;
+  }
+
+  function habilitarBoton() {
+    btnContinuar.disabled = false;
+  }
+
+  btnContinuar.addEventListener("click", () => {
+    const seleccionada = document.querySelector('input[name="respuesta"]:checked');
+    if (seleccionada) {
+      respuestas.push(puntajes[seleccionada.value]);
+      preguntaIndex++;
+      if (preguntaIndex < preguntas.length) {
+        mostrarPregunta();
+      } else {
+        const total = respuestas.reduce((a, b) => a + b, 0);
+        window.location.href = `resultados.html?score=${total}&edad=${encodeURIComponent(edadTexto)}`;
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

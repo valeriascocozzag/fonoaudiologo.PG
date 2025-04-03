@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resultados de Evaluación</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #dfd1d8;
+      padding: 40px 15px;
+      text-align: center;
+    }
+
+    .result-container {
+      background: #ffffff;
+      border-radius: 30px;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 50px 30px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.06);
+      animation: fadeIn 1s ease;
+    }
+
+    .result-icon {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    .result-title {
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .result-description {
+      font-size: 1.15rem;
+      color: #555;
+      margin-bottom: 35px;
+    }
+
+    .btn-whatsapp {
+      background-color: #25D366;
+      color: white;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #1ebc57;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .whatsapp-box {
+  background-color: #eafaf1; /* Verde muy suave */
+  border: 1px solid #c2ebd4;
+  border-radius: 20px;
+  padding: 25px 20px;
+  max-width: 600px;
+  margin: 30px auto 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  animation: fadeIn 1s ease-in;
+}
+
+.whatsapp-text {
+  font-size: 1rem;
+  color: #444;
+}
+  </style>
+</head>
+<body>
+
+  <div class="result-container">
+    <img id="iconoResultado" src="" alt="Resultado" class="result-icon" />
+    <h2 id="tituloResultado" class="result-title">Procesando...</h2>
+    <p id="descripcionResultado" class="result-description"></p>
+    <p id="descripcionResultado" class="result-description"></p>
+
+<!-- Bloque de WhatsApp -->
+<div class="whatsapp-box">
+  <div class="whatsapp-text text-muted small mb-3">
+    <strong>¡Contáctanos por WhatsApp!</strong><br>
+    Hablaremos sobre los resultados de la evaluación preliminar de tu hijo/a y responderemos todas tus dudas. 
+    Si es necesario, te ayudaremos a programar una evaluación detallada para entender mejor las necesidades específicas de tu pequeño/a. 
+    <br><br>
+    <em>Recuerda que no es necesario que tu niño/a esté presente en la consulta preliminar.</em>
+  </div>
+
+  <a id="btnWhatsapp" href="#" target="_blank" class="btn-whatsapp">Agendar cita por WhatsApp</a>
+</div>
+
+<script>
+  function obtenerParametro(nombre) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(nombre);
+  }
+
+  const score = parseFloat(obtenerParametro("score")) || 0;
+  const edad = obtenerParametro("edad") || "su hijo";
+
+  const icono = document.getElementById("iconoResultado");
+  const titulo = document.getElementById("tituloResultado");
+  const descripcion = document.getElementById("descripcionResultado");
+  const btnWhatsapp = document.getElementById("btnWhatsapp");
+
+  let tituloTexto = "";
+  let descripcionTexto = "";
+  let mensajeWhatsapp = "";
+  let iconoSrc = "";
+
+  if (score >= 3.5) {
+  tituloTexto = "✅ Desarrollo del lenguaje adecuado";
+  descripcionTexto = `¡Excelente! Según sus respuestas, el desarrollo del lenguaje de ${edad} está dentro de lo esperado para su edad. Le animamos a seguir estimulando su lenguaje mediante juegos, lecturas y conversaciones cotidianas.`;
+  mensajeWhatsapp = `Hola Paola G., hice la evaluación de lenguaje y el resultado fue positivo. Me gustaría agendar una cita de seguimiento.`;
+  iconoSrc = "img/icono-positivo-sin-texto.png";
+} else if (score >= 2.0) {
+  tituloTexto = "⚠️ Algunas señales a observar";
+  descripcionTexto = `Según sus respuestas, hay algunos indicadores en el lenguaje de ${edad} que podrían requerir seguimiento. No es alarmante, pero sería ideal observar su evolución y consultar si las dudas persisten.`;
+  mensajeWhatsapp = `Hola Paola G., hice la evaluación de lenguaje y el resultado muestra algunas señales a observar. Me gustaría tener una orientación profesional.`;
+  iconoSrc = "img/icono-observar-sin-texto.png";
+} else {
+  tituloTexto = "❗️ Requiere evaluación profesional";
+  descripcionTexto = `Las respuestas indican posibles retrasos en el desarrollo del lenguaje de ${edad}. Recomendamos agendar una evaluación profesional para conocer su situación actual y definir un plan de intervención.`;
+  mensajeWhatsapp = `Hola Paola G., hice la evaluación del lenguaje y el resultado indica que necesito una consulta profesional. ¿Podemos agendar una cita?`;
+  iconoSrc = "img/icono-evaluacion-sin-texto.png";
+}
+
+  titulo.textContent = tituloTexto;
+  descripcion.textContent = descripcionTexto;
+  icono.src = iconoSrc;
+  btnWhatsapp.href = `https://wa.me/584262692142?text=${encodeURIComponent(mensajeWhatsapp)}`;
+</script>
+
+</body>
+</html>
