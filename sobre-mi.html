@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Inicio | Paola G. Fonoaudiólogo</title>
+  <title>Sobre mí | Paola G. Fonoaudiólogo</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,15 +12,28 @@
       font-family: 'Poppins', sans-serif;
       background-color: #fff5f8;
     }
-    .wave-top {
-      background: linear-gradient(135deg, #F8B195, #F67280);
-      border-bottom-left-radius: 50% 10%;
-      border-bottom-right-radius: 50% 10%;
+    .navbar {
+      border-bottom: 5px solid #F67280;
     }
-    .btn-rounded {
-      border-radius: 50px;
-      padding: 0.75rem 2rem;
-      font-weight: 600;
+    .hero-sobre-mi {
+      background-image: url('/img/hero-sobre-mi.png');
+      background-size: cover;
+      background-position: center;
+      height: 85vh;
+      display: flex;
+      align-items: center;
+    }
+    .rounded-card {
+      border-radius: 20px;
+      background-color: #ffffffcc;
+    }
+    .highlight {
+      color: #F67280;
+      font-weight: bold;
+    }
+    .section-title {
+      color: #F67280;
+      font-weight: 700;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
@@ -33,34 +46,145 @@
 </head>
 <body>
 
-<!-- Navbar personalizado -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3" style="border-bottom: 5px solid #F67280;">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-decoration fs-4" href="#">
-      <img src="/Diseño sin título (2).png" alt="Logo Paola G." class="rounded-circle shadow-sm" style="width: 40px; height: 40px;">
-      Fonoaudiólogo Paola Gandica 
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold fs-4" href="index.html">
+      <img src="/img/logopaola.png" alt="Logo" class="rounded-circle shadow-sm" style="width: 40px; height: 40px;">
+      Fonoaudiólogo Paola Gandica
     </a>
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end text-center" id="navbarNav">
-      <ul class="navbar-nav gap-2">
-        <li class="nav-item">
-          <a class="nav-link active fw-semibold text-dark" href="index.html">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="sobre-mi.html">Sobre mí</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="servicios.html">Servicios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="evaluacion.html">Evaluación</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="contacto.html">Contacto</a>
-        </li>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav gap-3">
+        <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link text-dark fw-semibold active" href="sobre-mi.html">Sobre mí</a></li>
+        <li class="nav-item"><a class="nav-link active fw-semibold text-dark" href="queofrecemos.html">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="evaluacion.html">Evaluación</a></li>
+        <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="contacto.html">Contacto</a></li>
       </ul>
     </div>
   </div>
 </nav>
+
+<!-- Hero Section -->
+<section class="py-5" style="background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('/img/paoladefinitivo.png') no-repeat center center; background-size: cover;">
+<header class="hero-sobre-mi">
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <div class="p-4 shadow rounded-card" data-aos="zoom-in">
+          <h1 class="display-5 fw-bold">👩‍⚕️ Conoce a Paola G.</h1>
+          <p class="lead">Fonoaudióloga apasionada por el desarrollo del lenguaje infantil. <br>Mi misión es acompañarte a ti y a tu pequeño con amor, empatía y profesionalismo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+</section>
+
+<!-- Historia Personal -->
+<section class="py-5 bg-white" data-aos="fade-up">
+  <div class="container">
+    <h2 class="text-center section-title mb-5">💖 Mi historia</h2>
+    <div class="row align-items-center g-5">
+      <div class="col-md-6">
+        <img src="/img/paolaconsultorio.jpg" alt="Paola en su consultorio" class="img-fluid rounded-4 shadow">
+      </div>
+      <div class="col-md-6">
+        <p class="fs-5">Desde pequeña supe que mi vocación era ayudar a otros. Estudié fonoaudiología con el deseo de cambiar vidas a través de la comunicación. A lo largo de los años, he acompañado a decenas de familias en el hermoso camino del lenguaje, con respeto, cercanía y mucha alegría. 🎈</p>
+        <p class="fs-5">Creo en una terapia basada en el juego, el cariño y la conexión. Para mí, cada niño es un mundo lleno de posibilidades.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Formación y experiencia -->
+<section class="py-5 bg-light" data-aos="fade-up">
+  <div class="container">
+    <h2 class="text-center section-title mb-5">🎓 Formación y experiencia</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="bg-white p-4 rounded shadow-sm h-100">
+          <h5 class="fw-bold">🎓 Licenciatura en Fonoaudiología</h5>
+          <p>Colegio Universitario de Rehabilitación "May Hamilton". <br>
+            Formación enfocada en infancia y desarrollo del lenguaje.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="bg-white p-4 rounded shadow-sm h-100">
+          <h5 class="fw-bold">📚 Especializaciones y talleres</h5>
+          <ul class="mb-0">
+            <li>🧠 Intervención en lenguaje infantil</li>
+            <li>🎨 Juego terapéutico como herramienta</li>
+            <li>🗣️ Estimulación del habla en niños de 2 a 6 años</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Valores diferenciales -->
+<section class="py-5" style="background-color: #ffe7ef;" data-aos="fade-up">
+  <div class="container">
+    <h2 class="text-center section-title mb-4">🌟 Lo que me diferencia</h2>
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="bg-white p-4 rounded shadow-sm h-100">
+          <h5 class="fw-bold">❤️ Empatía real</h5>
+          <p>Me involucro emocionalmente con cada familia, creando un vínculo de confianza y respeto.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bg-white p-4 rounded shadow-sm h-100">
+          <h5 class="fw-bold">🎯 Enfoque personalizado</h5>
+          <p>Cada niño recibe una intervención diseñada a su medida, respetando su ritmo y necesidades.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bg-white p-4 rounded shadow-sm h-100">
+          <h5 class="fw-bold">✨ Terapia con alegría</h5>
+          <p>¡Aquí jugamos, reímos y aprendemos! La diversión es parte fundamental del progreso.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5" style="background-color: #fff0f5;" data-aos="fade-up">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      
+      <!-- Imagen a la izquierda -->
+      <div class="col-lg-6 text-center">
+        <img src="/img/paolaconniño.jpg" alt="Paola acompañando" class="img-fluid rounded-4 shadow" style="max-height: 400px;">
+      </div>
+
+      <!-- Texto a la derecha -->
+      <div class="col-lg-6">
+        <h2 class="fw-bold text-dark mb-3">¿Listos para iniciar el camino juntos?</h2>
+        <p class="fs-5 text-dark">
+          Cada niño tiene un ritmo único y un mundo por descubrir. Estoy aquí para guiarte en ese camino con compromiso, ternura y herramientas efectivas. ❤️
+        </p>
+        <a href="evaluacion.html" class="btn btn-dark btn-lg rounded-pill mt-3 px-4">
+          Comencemos hoy 🚀
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 bg-dark text-white text-center">
+  <div class="container">
+    <p class="mb-1">© 2025 Paola G. | Fonoaudióloga Infantil</p>
+    <p class="mb-0">Desarrollado con 💜 por Valeria Scocozza</p>
+  </div>
+</footer>
+
+</body>
+</html>
